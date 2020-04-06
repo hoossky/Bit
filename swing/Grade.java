@@ -49,35 +49,39 @@ public class Grade {
 	public int average() {
 		return total() / 3;
 	}
-	public String grade2() {
-		String grade = "";
-		int average = average();
-		
+//	public String grade2() {
+//		String grade = "F";
+//		int average = average();
 //		
-//		switch(average) {
-//		case 1 : result = F;
-//		case 2 : result = E;
+//		int num = average/ 10;
+//		switch(num) {
+//		
+//		case 5 : grade = "E"; break;
+//		case 6 : grade = "D"; break;
+//		case 7 : grade = "C"; break;
+//		case 8 : grade = "B"; break;
+//		case 9 : grade = "A"; break;
 //			
 //		}
-		
-		return grade;
-	}
+//		
+//		return grade;
+//	}
 	public String grade() {
-		String grade = "잘못 입력된 값입니다.";
+		String grade = "";
 		int average = average();
 				
-		if(average < 50) {
-			grade = "F 학점입니다.";	 
-		}else if(50 <= average ) {
-			grade = "E 학점입니다.";
-		}else if(60 <= average) {
-			grade = "D 학점입니다.";
-		}else if(70 <= average) {
-			grade = "C 학점입니다.";
-		}else if(80 <= average) {
-			grade = "B 학점입니다.";
-		}else if(90 <= average) {
+		if(average >= 90 ) {			
 			grade = "A 학점입니다.";
+		}else if(average >= 80) {
+			grade = "B 학점입니다.";
+		}else if(average >= 70) {
+			grade = "C 학점입니다.";
+		}else if(average >= 60) {
+			grade = "D 학점입니다.";
+		}else if(average >= 50) {
+			grade = "E 학점입니다.";
+		}else {
+			grade = "F 학점입니다.";
 		}
 		
 		return grade;

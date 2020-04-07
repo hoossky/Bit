@@ -4,7 +4,7 @@ public class Engine {
 	public static void main(String[] args) {
 		
 		Scanner scanner = new Scanner(System.in);
-		GradeBean[] grades = new GradeBean[3];
+		GradeService gradeService = new GradeService();
 		MemberBean[] members = new MemberBean[3];
 		
 		while(true) {
@@ -18,16 +18,22 @@ public class Engine {
 			switch(scanner.nextInt()) {
 			case 0: System.out.println("*** 종료합니다. ***"); return;
 			case 1: System.out.println("*** 성적표 ***");
+			
 			for(int i=0; i<3; i++) {
-				grades[i] = input(scanner);
-				
-			}
+			System.out.println("이름, 국어 , 영어, 수학을 입력해주세요.");
+			gradeService.add(new GradeBean(scanner.next(),
+					scanner.nextInt(),
+					scanner.nextInt(),
+					scanner.nextInt()));
+			}					
 			break;
+			
 			case 2: 
+				GradeBean[] grades = gradeService.getGrades();
 				for(int i = 0; i<3; i++) {
-					GradeBean grade = grades[i];
+					
 					System.out.println(String.format("[%s : 총점 %d 점, 평균 %d 점,학점 : %s]",
-							grade.getName(),grades[i].total(),grades[i].average(),grades[i].grade()));
+							grades[i].getName(),grades[i].total(),grades[i].average(),grades[i].grade()));
 				}
 				break;
 				

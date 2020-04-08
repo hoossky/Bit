@@ -11,6 +11,7 @@ public class Main {
 			case 0 : return;
 			case 1 : System.out.println("카드 3장 받기");
 			for(int i=0; i<3; i++) {
+				System.out.println("모양, 숫자 입력");
 				service.add(new CardBean(scanner.next(),
 						scanner.nextInt()));	
 			}

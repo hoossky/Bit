@@ -6,14 +6,6 @@ import lombok.Data;
 public class Phone {
 	private String phoneNumber, name, company;
 	
-	public Phone(String phoneNumber, String name, String company) {
-		this.phoneNumber = phoneNumber;
-		this.name = name;
-		this.company = company;
-	}
-
-	
-
 	@Override
 	public String toString() {
 		return "Phone : 전화 번호 =" + phoneNumber + ", 이름 =" + name + ", 제조사 =" + company;
@@ -21,7 +13,7 @@ public class Phone {
 	// 집 전화 번호, 이름, 제조사
 
 }
-
+@Data
 class CellPhone extends Phone {
 
 	private boolean portable;
@@ -33,26 +25,7 @@ class CellPhone extends Phone {
 		setPortable(portable);
 	}
 
-	public boolean isPortable() {
-		return portable;
-	}
-
-	public void setPortable(boolean portable) {
-//		if (portable) {
-//			this.move = "휴대 가능";
-//		} else {
-//			this.move = "휴대 불가능";
-//		}
-		this.move = (portable) ? "휴대 가능" : "휴대 불가능";
-	}
-
-	public String getMove() {
-		return move;
-	}
-
-	public void setMove(String move) {
-		this.move = move;
-	}
+	
 
 	@Override
 	public String toString() {
@@ -61,7 +34,7 @@ class CellPhone extends Phone {
 	}
 
 }
-
+@Data
 class Iphone extends CellPhone {
 	private String search;
 
@@ -70,21 +43,14 @@ class Iphone extends CellPhone {
 		this.search = search;
 	}
 
-	public String getSearch() {
-		return search;
-	}
-
-	public void setSearch(String search) {
-		this.search = search;
-	}
-
+	
 	@Override
 	public String toString() {
 
 		return super.toString() + ", 구글 검색 =" + search;
 	}
 }
-
+@Data
 class GalaxyNote extends Iphone {
 	public GalaxyNote(String phoneNumber, String name, String company, boolean portable, String search,
 			String bigSize) {
@@ -95,14 +61,7 @@ class GalaxyNote extends Iphone {
 
 	private String bigSize;
 
-	public String getBigSize() {
-		return bigSize;
-	}
-
-	public void setBigSize(String bigSize) {
-		this.bigSize = bigSize;
-	}
-
+	
 	@Override
 	public String toString() {
 

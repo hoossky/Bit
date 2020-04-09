@@ -8,6 +8,7 @@ public class PhoneController {
 	public static void main(String[] args) {
 		
 		PhoneService service = new PhoneService();
+		Phone phone = null;
 		String message = "";
 		
 		while(true) {
@@ -19,8 +20,12 @@ public class PhoneController {
 				case "0": return;
 				case "1":
 				for(int i=0; i<3; i++) {
+					phone = new Phone();
 				String[] values = JOptionPane.showInputDialog(Constants.PHONE_MENU).split(",");
-				service.add(new Phone(values[0],values[1],values[2]));	
+				phone.setPhoneNumber(values[0]);
+				phone.setPhoneNumber(values[1]);
+				phone.setPhoneNumber(values[2]);
+				service.add(phone);	
 				}
 				break;
 			
@@ -82,6 +87,6 @@ public class PhoneController {
 					
 			}
 		}
-	}
+}
 
 }

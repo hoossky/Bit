@@ -3,7 +3,7 @@ package com.jse.grade;
 import javax.swing.JOptionPane;
 import com.jse.util.Constants;
 import com.jse.member.Member;
-import com.sun.corba.se.impl.orbutil.closure.Constant;
+
 
 public class GradeController {
 	public static void main(String[] args) {

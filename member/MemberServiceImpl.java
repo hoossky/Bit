@@ -12,11 +12,12 @@ public class MemberServiceImpl implements MemberService {
 		this.members = members;
 	}
 	@Override
-	public Member[] getMembers() {
+	public Member[] getMembers() { //Member[] members 리턴
 		return members;
 	}
 	@Override
 	public void add(Member member) {
+		
 		members[count] = member;
 		count++;
 	}

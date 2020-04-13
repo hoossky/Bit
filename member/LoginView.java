@@ -60,8 +60,14 @@ public class LoginView extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == saveButton) {
+			textFields[0].setText("Hong,You,Lee,Shin,Leedo");
+			textFields[1].setText("1,1,1,1,1");
+			
+			String data = String.format("%s / %s",
+					 textFields[0].getText(),
+					 textFields[1].getText());
 
-			JOptionPane.showMessageDialog(this, textFields[0].getText());
+			
 
 		} else if (e.getSource() == cancelButton) {
 

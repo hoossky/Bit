@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 
 public class MemberView extends JFrame implements ActionListener {
@@ -25,7 +24,8 @@ public class MemberView extends JFrame implements ActionListener {
     private JTextField nameText, useridText, passwordText, ssnText,
     					addrText; 
     private JTextArea resultText; 
-    private JButton saveButton, listButton, loginButton; 
+    private JButton submitButton, listButton, loginButton, detailButton,
+    				 nameButton, genderButton, countButton, updateButton, deleteButton;
     public MemberService memberService;
 
 	public MemberView() {
@@ -110,26 +110,68 @@ public class MemberView extends JFrame implements ActionListener {
         container.add(addrText);
         
   
-        saveButton = new JButton("Save"); 
-        saveButton.setFont(new Font("Arial", Font.PLAIN, 15)); 
-        saveButton.setSize(100, 20); 
-        saveButton.setLocation(150, 450); 
-        saveButton.addActionListener(this);
-        container.add(saveButton); 
+        submitButton = new JButton("Submit"); 
+        submitButton.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        submitButton.setSize(100, 20); 
+        submitButton.setLocation(100, 400); 
+        submitButton.addActionListener(this);
+        container.add(submitButton); 
   
         listButton = new JButton("List"); 
         listButton.setFont(new Font("Arial", Font.PLAIN, 15)); 
         listButton.setSize(100, 20); 
-        listButton.setLocation(270, 450);
+        listButton.setLocation(220, 400);
         listButton.addActionListener(this);
         container.add(listButton); 
   
         loginButton = new JButton("Log in"); 
         loginButton.setFont(new Font("Arial", Font.PLAIN, 15)); 
         loginButton.setSize(100, 20); 
-        loginButton.setLocation(390, 450); 
+        loginButton.setLocation(340, 400); 
         loginButton.addActionListener(this);
         container.add(loginButton);
+        
+        detailButton = new JButton("Detail"); 
+        detailButton.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        detailButton.setSize(100, 20); 
+        detailButton.setLocation(100, 440); 
+        detailButton.addActionListener(this);
+        container.add(detailButton);
+        
+        nameButton = new JButton("Name"); 
+        nameButton.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        nameButton.setSize(100, 20); 
+        nameButton.setLocation(220, 440); 
+        nameButton.addActionListener(this);
+        container.add(nameButton);
+        
+        genderButton = new JButton("Gender"); 
+        genderButton.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        genderButton.setSize(100, 20); 
+        genderButton.setLocation(340, 440); 
+        genderButton.addActionListener(this);
+        container.add(genderButton);
+        
+        countButton = new JButton("Count"); 
+        countButton.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        countButton.setSize(100, 20); 
+        countButton.setLocation(100, 480); 
+        countButton.addActionListener(this);
+        container.add(countButton);
+        
+        updateButton = new JButton("Update"); 
+        updateButton.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        updateButton.setSize(100, 20); 
+        updateButton.setLocation(220, 480); 
+        updateButton.addActionListener(this);
+        container.add(updateButton);
+        
+        deleteButton = new JButton("Delete"); 
+        deleteButton.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        deleteButton.setSize(100, 20); 
+        deleteButton.setLocation(340, 480); 
+        deleteButton.addActionListener(this);
+        container.add(deleteButton);
         
         resultText = new JTextArea(); 
         resultText.setFont(new Font("맑은고딕", Font.PLAIN, 15)); 
@@ -145,7 +187,7 @@ public class MemberView extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == saveButton) {
+		if (e.getSource() == submitButton) {
 			nameText.setText("홍길동,유관순,이순신,신사임당,이도");
 			useridText.setText("hong,you,lee,shin,leedo");
 			passwordText.setText("1,1,1,1,1");
@@ -166,21 +208,21 @@ public class MemberView extends JFrame implements ActionListener {
 			String[] passwds = arr[2].split(",");
 			String[] ssns = arr[3].split(",");
 			String[] adresss = arr[4].split(",");
-			Member[] members = new Member[5];
+			Member member = null;
 
-			for (int i = 0; i < 5; i++) {
-				members[i] = new Member(); // Member m = new Member();
-				members[i].setName(names[i]);
-				members[i].setUserid(userids[i]);
-				members[i].setPasswd(passwds[i]);
-				members[i].setSsn(ssns[i]);
-				members[i].setAddress(adresss[i]);
-				memberService.add(members[i]);
+			for (int i = 0; i < names.length; i++) {
+				member = new Member(); // Member m = new Member();
+				member.setName(names[i]);
+				member.setUserid(userids[i]);
+				member.setPasswd(passwds[i]);
+				member.setSsn(ssns[i]);
+				member.setAddress(adresss[i]);
+				memberService.add(member);
 				
 				}
 
 		} else if (e.getSource() == listButton) {
-			Member[] members = memberService.getMembers(); 
+			Member[] members = memberService.list(); 
 			String result = "";	
 			for (int i = 0; i < members.length; i++) {
 //			System.out.println(members[i]); // 상속의 개념, lombok
@@ -210,9 +252,62 @@ public class MemberView extends JFrame implements ActionListener {
 				
 				resultText.setText(m.toString());
 			}else {
-				resultText.setText("로그인 실패");
+				JOptionPane.showMessageDialog(this, "로그인 실패");
+				
 			}
 			
+		}else if(e.getSource() == detailButton) {
+			
+			String userid = useridText.getText();
+			
+			Member detailUserid = memberService.detail(userid);
+			
+			if(detailUserid != null) {
+				JOptionPane.showMessageDialog(this, "상세 정보");
+				resultText.setText(detailUserid.toString());
+				
+			}else {
+				resultText.setText("잘못된 ID입니다.");
+			}
+		}else if(e.getSource() == nameButton) {
+			
+			
+			Member[] searchNames = memberService.searchByName(nameText.getText());
+			
+			if(searchNames != null) {
+				String result = "";
+				for(int i=0; i<searchNames.length; i++) {
+					result += searchNames[i].toString()	+"\n";
+				}
+				
+				resultText.setText(result);
+				
+			}else {
+				resultText.setText("잘못된 이름입니다.");
+			}
+			
+		}else if(e.getSource() == genderButton) {
+			JOptionPane.showMessageDialog(this, "수정합니다");
+			memberService.searchByName(ssnText.getText());
+			
+		}else if(e.getSource() == countButton) {
+			resultText.setText(String.valueOf(memberService.count()));
+			
+		}else if(e.getSource() == updateButton) {
+			JOptionPane.showMessageDialog(this, "수정합니다");
+			String userid = useridText.getText();
+			String newPassword = useridText.getText();
+			Member updateMember = new Member();
+			updateMember.setUserid(userid);
+			updateMember.setPasswd(newPassword);
+			memberService.update(updateMember);
+			
+		}else if(e.getSource() == deleteButton) {
+			Member deleteMember = new Member();
+			JOptionPane.showMessageDialog(this, "삭제합니다");
+			deleteMember.setUserid(useridText.getText());
+			deleteMember.setPasswd(passwordText.getText());
+			memberService.delete(deleteMember);
 		}
 
 	}

@@ -1,62 +1,26 @@
 package com.jse.phone;
 
-public class PhoneService {
-	private Phone[] phones;
-	private CellPhone[] cellPhones;
-	private Iphone[] iphones;
-	private GalaxyNote[] galaxyNotes;
-	private int count;
+public interface PhoneService {
+	public void add(GalaxyNote phone);
+	public void add(Iphone phone);
+	public void add(CellPhone phone);
+	public void add(Phone phone);
 	
-	public PhoneService() {
-		phones = new Phone[3];
-		cellPhones = new CellPhone[3];
-		iphones = new Iphone[3];
-		galaxyNotes = new GalaxyNote[3];
-		count = 0;
-		
-	}
-	public GalaxyNote[] getGalaxyNotes() {
-		return galaxyNotes;
-	}
-	public void setGalaxyNotes(GalaxyNote[] galaxyNotes) {
-		this.galaxyNotes = galaxyNotes;
-	}
-	public Iphone[] getIphones() {
-		return iphones;
-	}
-	public void setIphones(Iphone[] iphones) {
-		this.iphones = iphones;
-	}
-	public CellPhone[] getCellPhones() {
-		return cellPhones;
-	}
-	public void setCellPhones(CellPhone[] cellPhones) {
-		this.cellPhones = cellPhones;
-	}
-	public void setPhones(Phone[] phones) {
-		this.phones = phones;
-	}
-	public Phone[] getPhones() {
-		return phones;
-	}
-	public void add(Phone phone) {
-		phones[count] = phone;
-		count++;
-	}
-	public void add(CellPhone phone) {
-		cellPhones[count] = phone;
-		count++;
-	}
-	public void add(Iphone phone) {
-		iphones[count] = phone;
-		count++;
-	}
-	public void add(GalaxyNote phone) {
-		galaxyNotes[count] = phone;
-		count++;
-	}
+	public GalaxyNote[] galaxyNoteList();
+	public Iphone[] iphoneList();
+	public CellPhone[] cellPhoneList();
+	public Phone[] phoneList();
+	
+	public Iphone detail(Iphone phone);
+	public GalaxyNote detail(GalaxyNote phone);
+	public CellPhone Detail(CellPhone phone);
+	public Phone detail(Phone phone);
+
+	public int count();
+	
+	
+	public void update(Phone phone);
+	public void delete(Phone phone);
+	
 
 }
-
-
-

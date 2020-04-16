@@ -2,7 +2,6 @@ package com.jse.grade;
 
 import javax.swing.JOptionPane;
 import com.jse.util.Constants;
-import com.jse.member.Member;
 
 
 public class GradeController {
@@ -32,7 +31,7 @@ public class GradeController {
 
 			case "2":
 								
-				JOptionPane.showMessageDialog(null, gradeService.getGrades());
+				JOptionPane.showMessageDialog(null, gradeService.list());
 				
 				break;
 

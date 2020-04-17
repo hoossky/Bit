@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+//import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -188,7 +188,7 @@ public class MemberView extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == submitButton) {
-			nameText.setText("홍길동,유관순,이순신,신사임당,이도");
+			nameText.setText("홍길동,유관순,이도,신사임당,이도");
 			useridText.setText("hong,you,lee,shin,leedo");
 			passwordText.setText("1,1,1,1,1");
 			ssnText.setText("900101-1,960101-2,980101-1,011010-4,020606-3");
@@ -272,12 +272,12 @@ public class MemberView extends JFrame implements ActionListener {
 		}else if(e.getSource() == nameButton) {
 			
 			
-			Member[] searchNames = memberService.searchByName(nameText.getText());
+			Member[] returnNames = memberService.searchByName(nameText.getText());
 			
-			if(searchNames != null) {
+			if(returnNames != null) {
 				String result = "";
-				for(int i=0; i<searchNames.length; i++) {
-					result += searchNames[i].toString()	+"\n";
+				for(int i=0; i<returnNames.length; i++) {
+					result += returnNames[i].toString()	+"\n";
 				}
 				
 				resultText.setText(result);
@@ -287,14 +287,21 @@ public class MemberView extends JFrame implements ActionListener {
 			}
 			
 		}else if(e.getSource() == genderButton) {
-			JOptionPane.showMessageDialog(this, "수정합니다");
-			memberService.searchByName(ssnText.getText());
+			JOptionPane.showMessageDialog(this, "성별 구분");
+			
+			Member[] returnGender = memberService.searchByGender(ssnText.getText());
+			if(returnGender != null) {
+				resultText.setText(returnGender.toString());
+				
+			}else {
+				resultText.setText("잘못된 주민번호 입니다");
+			}
 			
 		}else if(e.getSource() == countButton) {
 			resultText.setText(String.valueOf(memberService.count()));
 			
 		}else if(e.getSource() == updateButton) {
-			JOptionPane.showMessageDialog(this, "수정합니다");
+			JOptionPane.showMessageDialog(this, "수 정");
 			String userid = useridText.getText();
 			String newPassword = useridText.getText();
 			Member updateMember = new Member();
@@ -304,7 +311,7 @@ public class MemberView extends JFrame implements ActionListener {
 			
 		}else if(e.getSource() == deleteButton) {
 			Member deleteMember = new Member();
-			JOptionPane.showMessageDialog(this, "삭제합니다");
+			JOptionPane.showMessageDialog(this, "삭 제");
 			deleteMember.setUserid(useridText.getText());
 			deleteMember.setPasswd(passwordText.getText());
 			memberService.delete(deleteMember);

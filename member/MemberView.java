@@ -188,7 +188,7 @@ public class MemberView extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == submitButton) {
-			nameText.setText("홍길동,유관순,이도,신사임당,이도");
+			nameText.setText("홍길동,유관순,이순신,신사임당,이도");
 			useridText.setText("hong,you,lee,shin,leedo");
 			passwordText.setText("1,1,1,1,1");
 			ssnText.setText("900101-1,960101-2,980101-1,011010-4,020606-3");

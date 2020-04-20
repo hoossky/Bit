@@ -3,65 +3,67 @@ package com.jse.member;
 public class MemberServiceImpl implements MemberService {
 
 	private Member[] members;
-	int count;
+	private int count;
 
 	public MemberServiceImpl() {
 		members = new Member[5];
-		count = 0;
 	}
 
 	@Override
 	public void add(Member member) {
 		members[count] = member;
 		count++;
-
 	}
 
 	@Override
 	public Member[] list() {
-
 		return members;
 	}
 
 	@Override
 	public Member[] searchByName(String name) {
-		Member[] returnNames = null;
-		int searchCount = count(name);
-		if (searchCount != 0) {
-			returnNames = new Member[searchCount];
+		Member[] returnName = null;
+		int searchCoint = count(name);
+		if (searchCoint != 0) {
+			returnName = new Member[searchCoint];
 			int j = 0;
 			for (int i = 0; i < count; i++) {
 				if (name.equals(members[i].getName())) {
-					returnNames[j] = members[i]; // 질문*************************
+					returnName[j] = members[i];
 					j++;
-					if (searchCount == j) {
+					if(searchCoint ==j ) {
+						
 						break;
 					}
+
 				}
 			}
 		}
-		return returnNames;
+
+		return returnName;
 	}
 
 	@Override
 	public Member[] searchByGender(String gender) {
-		Member[] returnGenders = null;
-		
-		return returnGenders;
+		Member[] returnGender = null;
+
+		return returnGender;
 	}
 
 	@Override
 	public Member detail(String userid) {
-		Member returndetail = null;
+		Member returnDetail = null;
+
 		for (int i = 0; i < count; i++) {
 			if (userid.equals(members[i].getUserid())) {
 
-				returndetail = members[i];
-				break;
-			}
+				returnDetail = members[i];
 
+				break;
+
+			}
 		}
-		return returndetail;
+		return returnDetail;
 	}
 
 	@Override
@@ -72,28 +74,36 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int count(String name) {
-		int returncount = 0;
+		int returnCount = 0;
+
 		for (int i = 0; i < count; i++) {
+
 			if (name.equals(members[i].getName())) {
-				returncount++;
+				returnCount++;
+				break;
 			}
 		}
-		return returncount;
+
+		return returnCount;
 	}
 
 	@Override
 	public Member login(Member member) {
-		Member returnlogin = null;
+
+		Member returnLogin = null;
+
 		for (int i = 0; i < count; i++) {
 			if (member.getUserid().equals(members[i].getUserid())
+
 					&& member.getPasswd().equals(members[i].getPasswd())) {
 
-				returnlogin = members[i];
+				returnLogin = members[i];
 				break;
-
 			}
+
 		}
-		return returnlogin;
+
+		return returnLogin;
 	}
 
 	@Override
@@ -101,12 +111,12 @@ public class MemberServiceImpl implements MemberService {
 
 		for (int i = 0; i < count; i++) {
 			if (member.getUserid().equals(members[i].getUserid())) {
+				
 				members[i].setPasswd(member.getPasswd());
 				break;
 
 			}
 		}
-
 	}
 
 	@Override
@@ -114,14 +124,15 @@ public class MemberServiceImpl implements MemberService {
 
 		for (int i = 0; i < count; i++) {
 			if (member.getUserid().equals(members[i].getUserid())
+
 					&& member.getPasswd().equals(members[i].getPasswd())) {
 
 				members[i] = members[count - 1];
 				members[count - 1] = null;
-				i--;
+				count--;
+
 			}
 		}
-
 	}
 
 }

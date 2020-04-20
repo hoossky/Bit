@@ -22,14 +22,14 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member[] searchByName(String name) {
-		Member[] returnName = null;
+		Member[] returnNames = null;
 		int searchCoint = count(name);
 		if (searchCoint != 0) {
-			returnName = new Member[searchCoint];
+			returnNames = new Member[searchCoint];
 			int j = 0;
 			for (int i = 0; i < count; i++) {
 				if (name.equals(members[i].getName())) {
-					returnName[j] = members[i];
+					returnNames[j] = members[i];
 					j++;
 					if(searchCoint ==j ) {
 						
@@ -40,7 +40,7 @@ public class MemberServiceImpl implements MemberService {
 			}
 		}
 
-		return returnName;
+		return returnNames;
 	}
 
 	@Override
@@ -80,7 +80,6 @@ public class MemberServiceImpl implements MemberService {
 
 			if (name.equals(members[i].getName())) {
 				returnCount++;
-				break;
 			}
 		}
 

@@ -60,17 +60,17 @@ public class GradeServiceImpl implements GradeService {
 		int average = average(grade);
 
 		if (average >= 90) {
-			result = "A 학점입니다.";
+			result = "A";
 		} else if (average >= 80) {
-			result = "B 학점입니다.";
+			result = "B";
 		} else if (average >= 70) {
-			result = "C 학점입니다.";
+			result = "C";
 		} else if (average >= 60) {
-			result = "D 학점입니다.";
+			result = "D";
 		} else if (average >= 50) {
-			result = "E 학점입니다.";
+			result = "E";
 		} else {
-			result = "F 학점입니다.";
+			result = "F";
 		}
 
 		return result;
